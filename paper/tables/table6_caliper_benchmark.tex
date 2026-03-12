@@ -1,0 +1,19 @@
+\begin{table}[!t]
+\renewcommand{\arraystretch}{1.2}
+\caption{Hyperledger Fabric Throughput and Latency Under Varying Send Rates (Caliper Benchmark, 400ms Block Timeout, 10k Batch, 50MB Payload)}
+\label{tab:caliper}
+\centering
+\begin{tabular}{lccccccr}
+\hline
+\textbf{Workload} & \textbf{Succ} & \textbf{Fail} & \textbf{Observed Rate} & \textbf{Min (s)} & \textbf{Avg (s)} & \textbf{Max (s)} & \textbf{Tput (TPS)} \\
+\hline
+500 TPS  & 50,000 & 0 & 499.9 & 0.17 & 0.42 & 0.79 & 498.4 \\
+1000 TPS & 50,000 & 0 & 614.5 & 0.14 & 0.49 & 1.01 & 613.4 \\
+2000 TPS & 50,000 & 0 & 621.2 & 0.15 & 0.48 & 0.99 & \textbf{619.9} \\
+3000 TPS & 50,000 & 0 & 615.5 & 0.14 & 0.48 & 1.04 & 614.0 \\
+4000 TPS & 50,000 & 0 & 617.8 & 0.16 & 0.48 & 0.97 & 614.0 \\
+\hline
+\multicolumn{8}{l}{\textit{Saturation observed at $\approx$614--620 TPS. Zero failures across 250,000 transactions.}} \\
+\hline
+\end{tabular}
+\end{table}

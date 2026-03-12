@@ -1,0 +1,25 @@
+\begin{table}[!t]
+\renewcommand{\arraystretch}{1.2}
+\caption{Statistical Characteristics of the 5G-NIDD Dataset}
+\label{tab:dataset}
+\centering
+\begin{tabular}{ll}
+\hline
+\textbf{Parameter} & \textbf{Value} \\
+\hline
+Dataset & 5G-NIDD \\
+Total training samples & 972,700 \\
+Total test samples & 243,160 \\
+Features & 50 \\
+FL clients & 20 \\
+Samples per client (train/test) & 48,635 / 12,158 \\
+Train benign / malicious & 19,109 / 29,526 per client \\
+Test benign / malicious & 4,777 / 7,381 per client \\
+Attack families (4) & Flooding, AppLayer, LowRateDoS, Scanning \\
+Attack types (8) & UDPFlood, SYNFlood, ICMPFlood, HTTPFlood, \\
+                  & SlowrateDoS, TCPConnectScan, SYNScan, UDPScan \\
+Non-IID distribution & Each client specialised in 1 primary family \\
+Train/Test split & 80\% / 20\% stratified \\
+\hline
+\end{tabular}
+\end{table}

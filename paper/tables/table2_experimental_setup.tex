@@ -1,0 +1,27 @@
+\begin{table}[!t]
+\renewcommand{\arraystretch}{1.2}
+\caption{Experimental Testbed Configuration}
+\label{tab:setup}
+\centering
+\begin{tabular}{ll}
+\hline
+\textbf{Component} & \textbf{Configuration} \\
+\hline
+Blockchain & Hyperledger Fabric v2.5 \\
+Organizations & 2 (Org1, Org2) \\
+Peers & 2 (peer0.org1, peer0.org2) \\
+Ordering service & Raft (1 orderer) \\
+Channel / Chaincode & dtchannel / governance (Go) \\
+Storage & IPFS + IPFS Cluster (5 nodes) \\
+FL clients & 20 edge clients across 4 VMs \\
+FL model & Logistic Regression (binary) \\
+FL rounds (clean) & 20 \\
+FL rounds (byzantine) & 5 per attack scenario \\
+Byzantine attacks & Signflip, Gaussian, Scaling, Random, Backdoor \\
+Byzantine ratios & 20\% (4/20), 30\% (6/20) \\
+Aggregators & FedAvg, Multi-Krum, TrimmedMean \\
+VM setup & 4 $\times$ Ubuntu 22.04, 8 vCPU, 16 GB RAM \\
+Benchmark tool & Hyperledger Caliper v0.5 \\
+\hline
+\end{tabular}
+\end{table}

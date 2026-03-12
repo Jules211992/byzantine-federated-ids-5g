@@ -1,0 +1,20 @@
+\begin{table}[!t]
+\renewcommand{\arraystretch}{1.2}
+\caption{IPFS and Blockchain Transaction Latency (Baseline vs. Backdoor Scenario)}
+\label{tab:infra}
+\centering
+\begin{tabular}{llcccc}
+\hline
+\textbf{Component} & \textbf{Scenario} & \textbf{p50 (ms)} & \textbf{p95 (ms)} & \textbf{p99 (ms)} & \textbf{Avg (ms)} \\
+\hline
+IPFS       & Baseline  &  96.00 & 110.00 & 114.01 &  96.04 \\
+IPFS       & Backdoor  & 101.76 & 111.28 & 120.41 & 102.76 \\
+\hline
+Fabric tx  & Baseline  & 589.00 & 599.00 & 618.32 & 591.09 \\
+Fabric tx  & Backdoor  & 686.00 & 705.20 & 719.01 & 687.61 \\
+\hline
+Total E2E  & Baseline  & 686.00 & 703.05 & 715.35 & 688.08 \\
+Total E2E  & Backdoor  & 790.85 & 812.46 & 818.50 & 790.37 \\
+\hline
+\end{tabular}
+\end{table}
