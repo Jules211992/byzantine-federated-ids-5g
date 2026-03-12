@@ -9,18 +9,20 @@
 \hline
 Blockchain & Hyperledger Fabric v2.5 \\
 Organizations & 2 (Org1, Org2) \\
-Peers & 2 (peer0.org1, peer0.org2) \\
-Ordering service & Raft (1 orderer) \\
+Peers & 4 (peer0/peer1 per org) \\
+Ordering service & Raft (3 orderers, $f_{\text{crash}}=1$) \\
 Channel / Chaincode & dtchannel / governance (Go) \\
-Storage & IPFS + IPFS Cluster (5 nodes) \\
-FL clients & 20 edge clients across 4 VMs \\
-FL model & Logistic Regression (binary) \\
-FL rounds (clean) & 20 \\
-FL rounds (byzantine) & 5 per attack scenario \\
+Storage & IPFS (content-addressed, off-chain) \\
+FL clients & 20 edge clients across 4 VMs (5 per VM) \\
+FL model & Logistic Regression, $\mathbf{w}\in\mathbb{R}^{50}$, SGD lr=0.01 \\
+FL rounds & 20 (clean and Backdoor); 5 (other attacks) \\
+Threshold selection & Val set sweep $t\in\{0.05,\ldots,0.95\}$; reported on holdout \\
+Seeds & 3 independent seeds (42, 123, 2024) \\
 Byzantine attacks & Signflip, Gaussian, Scaling, Random, Backdoor \\
-Byzantine ratios & 20\% (4/20), 30\% (6/20) \\
-Aggregators & FedAvg, Multi-Krum, TrimmedMean \\
-VM setup & 4 $\times$ Ubuntu 22.04, 8 vCPU, 16 GB RAM \\
+Byzantine ratios & 20\% ($f$=4/20), 30\% ($f$=6/20) \\
+Aggregators & FedAvg, Multi-Krum ($f$=4), TrimmedMean (trim=0.1) \\
+VM setup & 10 $\times$ Ubuntu 22.04; 9 VMs: 8 vCPU, 30\,GB RAM; \\
+         & 1 VM (orch): 4 vCPU, 15\,GB RAM \\
 Benchmark tool & Hyperledger Caliper v0.5 \\
 \hline
 \end{tabular}
