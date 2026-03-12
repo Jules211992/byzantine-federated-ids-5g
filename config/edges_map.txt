@@ -1,0 +1,4 @@
+edge-client-1 10.10.0.112
+edge-client-2 10.10.0.11
+edge-client-3 10.10.0.121
+edge-client-4 10.10.0.10

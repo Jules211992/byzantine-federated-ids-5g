@@ -1,0 +1,42 @@
+test:
+  name: governance-submitalert-6w-25k
+  description: 6 workers, 25k tx per TPS
+  workers:
+    type: local
+    number: 6
+  rounds:
+    - label: submit-alert-tps500
+      txNumber: 25000
+      rateControl:
+        type: fixed-rate
+        opts:
+          tps: 500
+      workload:
+        module: benchmarks/workload/submit-alert.js
+
+    - label: submit-alert-tps1000
+      txNumber: 25000
+      rateControl:
+        type: fixed-rate
+        opts:
+          tps: 1000
+      workload:
+        module: benchmarks/workload/submit-alert.js
+
+    - label: submit-alert-tps1500
+      txNumber: 25000
+      rateControl:
+        type: fixed-rate
+        opts:
+          tps: 1500
+      workload:
+        module: benchmarks/workload/submit-alert.js
+
+    - label: submit-alert-tps2000
+      txNumber: 25000
+      rateControl:
+        type: fixed-rate
+        opts:
+          tps: 2000
+      workload:
+        module: benchmarks/workload/submit-alert.js

@@ -1,0 +1,59 @@
+{
+  "uid": "containers",
+  "title": "Containers (cAdvisor)",
+  "timezone": "browser",
+  "schemaVersion": 39,
+  "version": 1,
+  "refresh": "10s",
+  "tags": ["cadvisor"],
+  "templating": {
+    "list": [
+      {
+        "name": "instance",
+        "type": "query",
+        "datasource": {"type": "prometheus", "uid": "Prometheus"},
+        "query": "label_values(container_cpu_usage_seconds_total, instance)",
+        "refresh": 1,
+        "multi": true,
+        "includeAll": true,
+        "allValue": ".*",
+        "current": {"text": "All", "value": ".*"}
+      }
+    ]
+  },
+  "panels": [
+    {
+      "type": "timeseries",
+      "title": "Top 10 container CPU (cores/s)",
+      "gridPos": {"x": 0, "y": 0, "w": 24, "h": 9},
+      "targets": [
+        {
+          "expr": "topk(10, rate(container_cpu_usage_seconds_total{instance=~\"$instance\", image!=\"\"}[1m]))",
+          "legendFormat": "{{name}}"
+        }
+      ]
+    },
+    {
+      "type": "timeseries",
+      "title": "Top 10 container Memory (bytes)",
+      "gridPos": {"x": 0, "y": 9, "w": 24, "h": 9},
+      "targets": [
+        {
+          "expr": "topk(10, container_memory_working_set_bytes{instance=~\"$instance\", image!=\"\"})",
+          "legendFormat": "{{name}}"
+        }
+      ]
+    },
+    {
+      "type": "timeseries",
+      "title": "Top 10 container Network RX (bytes/s)",
+      "gridPos": {"x": 0, "y": 18, "w": 24, "h": 9},
+      "targets": [
+        {
+          "expr": "topk(10, rate(container_network_receive_bytes_total{instance=~\"$instance\"}[1m]))",
+          "legendFormat": "{{name}}"
+        }
+      ]
+    }
+  ]
+}

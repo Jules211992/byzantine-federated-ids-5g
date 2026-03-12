@@ -1,0 +1,51 @@
+test:
+  name: governance-submitalert-2peers-any
+  description: 5 workers, load-balanced org1/org2, endorsement ANY
+  workers:
+    type: local
+    number: 5
+
+  rounds:
+    - label: submit-alert-tps500
+      txNumber: 50000
+      rateControl:
+        type: fixed-rate
+        opts:
+          tps: 500
+      workload:
+        module: benchmarks/workload/submit-alert.js
+        arguments:
+          contractId: governance
+
+    - label: submit-alert-tps1000
+      txNumber: 50000
+      rateControl:
+        type: fixed-rate
+        opts:
+          tps: 1000
+      workload:
+        module: benchmarks/workload/submit-alert.js
+        arguments:
+          contractId: governance
+
+    - label: submit-alert-tps2000
+      txNumber: 50000
+      rateControl:
+        type: fixed-rate
+        opts:
+          tps: 2000
+      workload:
+        module: benchmarks/workload/submit-alert.js
+        arguments:
+          contractId: governance
+
+    - label: submit-alert-tps3000
+      txNumber: 50000
+      rateControl:
+        type: fixed-rate
+        opts:
+          tps: 3000
+      workload:
+        module: benchmarks/workload/submit-alert.js
+        arguments:
+          contractId: governance

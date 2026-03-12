@@ -1,0 +1,11 @@
+{
+  "dependencies": {
+    "@grpc/grpc-js": "^1.10.3",
+    "@hyperledger/fabric-gateway": "^1.5.0"
+  },
+  "devDependencies": {
+    "@hyperledger/caliper-cli": "^0.6.0",
+    "@hyperledger/caliper-core": "^0.6.0",
+    "@hyperledger/caliper-fabric": "^0.6.0"
+  }
+}

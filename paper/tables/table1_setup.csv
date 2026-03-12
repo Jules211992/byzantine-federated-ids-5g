@@ -1,0 +1,16 @@
+Parameter,Value,Notes
+Dataset,UNSW-NB15,Binary + attack_cat (9 classes)
+Train / Test split,"82,332 / 25,879",stratified split
+FL clients (N),5,4 honest + 1 byzantine (attacks)
+FL rounds (T),20,global communication rounds
+Local epochs (E),3,SGD optimizer
+Learning rate,0.005,fixed
+Batch size,256,local training
+Class balancing,1:1 (pos:neg),oversampling minority
+Aggregation,Multi-Krum,"n=5, f=1"
+Defense (on-chain),Anti-replay + Anti-rollback + MSP,"alertID unique, roundID monotone"
+Fabric consensus,Raft,3 orderers (f=1)
+Fabric peers,"2 (peer0.org1, peer0.org2)",LevelDB StateDB
+BatchTimeout,500ms,MaxMessageCount=500
+IPFS cluster,5 nodes,"replication min=3, max=5"
+FL update payload,5.6 KB,per client per round

@@ -1,0 +1,58 @@
+'use strict';
+const { WorkloadModuleBase } = require('@hyperledger/caliper-core');
+
+class SubmitAlertWorkload extends WorkloadModuleBase {
+  async initializeWorkloadModule(workerIndex, totalWorkers, roundIndex, roundArguments, sutAdapter, sutContext) {
+    await super.initializeWorkloadModule(workerIndex, totalWorkers, roundIndex, roundArguments, sutAdapter, sutContext);
+
+    this.workerIndex = workerIndex;
+    this.roundIndex = roundIndex;
+
+    this.contractId = 'governance';
+    this.contractFunction = 'SubmitAlert';
+
+    this.runId = process.env.CALIPER_RUN_ID || String(Date.now());
+
+    this.clientId = `caliper-client-w${workerIndex}-r${roundIndex}-${this.runId}`;
+    this.meta = JSON.stringify({ model: 'caliper', run: this.runId, worker: workerIndex, caliperRound: roundIndex });
+
+    this.tx = 0;
+
+    if (workerIndex % 2 === 0) {
+      this.invokerMspId = 'Org1MSP';
+      this.invokerIdentity = 'admin-org1';
+    } else {
+      this.invokerMspId = 'Org2MSP';
+      this.invokerIdentity = 'admin-org2';
+    }
+  }
+
+  async submitTransaction() {
+    this.tx += 1;
+
+    const round = String(this.tx);
+    const ts = String(Math.floor(Date.now() / 1000));
+
+    const alertId = `cal-${this.workerIndex}-${this.roundIndex}-${round}-${this.runId}`;
+    const severity = 'HIGH';
+    const sig = `sig-${this.workerIndex}-${this.roundIndex}-${round}-${this.runId}`;
+    const nonce = `n-${this.workerIndex}-${this.roundIndex}-${round}-${this.runId}`;
+
+    const req = {
+      contractId: this.contractId,
+      contractFunction: this.contractFunction,
+      invokerMspId: this.invokerMspId,
+      invokerIdentity: this.invokerIdentity,
+      contractArguments: [alertId, round, this.clientId, ts, severity, sig, this.meta, nonce],
+      readOnly: false
+    };
+
+    await this.sutAdapter.sendRequests(req);
+  }
+}
+
+function createWorkloadModule() {
+  return new SubmitAlertWorkload();
+}
+
+module.exports.createWorkloadModule = createWorkloadModule;

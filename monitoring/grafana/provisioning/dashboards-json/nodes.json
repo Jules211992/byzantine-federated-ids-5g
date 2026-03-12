@@ -1,0 +1,90 @@
+{
+  "uid": "nodes",
+  "title": "Nodes (node-exporter)",
+  "timezone": "browser",
+  "schemaVersion": 39,
+  "version": 1,
+  "refresh": "10s",
+  "tags": ["node-exporter"],
+  "templating": {
+    "list": [
+      {
+        "name": "instance",
+        "type": "query",
+        "datasource": {"type": "prometheus", "uid": "Prometheus"},
+        "query": "label_values(node_uname_info, instance)",
+        "refresh": 1,
+        "multi": true,
+        "includeAll": true,
+        "allValue": ".*",
+        "current": {"text": "All", "value": ".*"}
+      }
+    ]
+  },
+  "panels": [
+    {
+      "type": "timeseries",
+      "title": "CPU usage (%)",
+      "gridPos": {"x": 0, "y": 0, "w": 12, "h": 8},
+      "targets": [
+        {
+          "expr": "100*(1-avg by(instance)(rate(node_cpu_seconds_total{mode=\"idle\",instance=~\"$instance\"}[1m])))",
+          "legendFormat": "{{instance}}"
+        }
+      ]
+    },
+    {
+      "type": "timeseries",
+      "title": "Memory usage (%)",
+      "gridPos": {"x": 12, "y": 0, "w": 12, "h": 8},
+      "targets": [
+        {
+          "expr": "100*(1-(node_memory_MemAvailable_bytes{instance=~\"$instance\"}/node_memory_MemTotal_bytes{instance=~\"$instance\"}))",
+          "legendFormat": "{{instance}}"
+        }
+      ]
+    },
+    {
+      "type": "timeseries",
+      "title": "Load (1m / 5m)",
+      "gridPos": {"x": 0, "y": 8, "w": 12, "h": 8},
+      "targets": [
+        {"expr": "node_load1{instance=~\"$instance\"}", "legendFormat": "{{instance}} load1"},
+        {"expr": "node_load5{instance=~\"$instance\"}", "legendFormat": "{{instance}} load5"}
+      ]
+    },
+    {
+      "type": "timeseries",
+      "title": "Disk used (%) mount=/",
+      "gridPos": {"x": 12, "y": 8, "w": 12, "h": 8},
+      "targets": [
+        {
+          "expr": "100*(1-node_filesystem_avail_bytes{mountpoint=\"/\",fstype!~\"tmpfs|overlay\",instance=~\"$instance\"}/node_filesystem_size_bytes{mountpoint=\"/\",fstype!~\"tmpfs|overlay\",instance=~\"$instance\"})",
+          "legendFormat": "{{instance}}"
+        }
+      ]
+    },
+    {
+      "type": "timeseries",
+      "title": "Network RX (bytes/s) sum",
+      "gridPos": {"x": 0, "y": 16, "w": 12, "h": 8},
+      "targets": [
+        {
+          "expr": "sum by(instance)(rate(node_network_receive_bytes_total{device!~\"lo\",instance=~\"$instance\"}[1m]))",
+          "legendFormat": "{{instance}}"
+        }
+      ]
+    },
+    {
+      "type": "timeseries",
+      "title": "Network TX (bytes/s) sum",
+      "gridPos": {"x": 12, "y": 16, "w": 12, "h": 8},
+      "targets": [
+        {
+          "expr": "sum by(instance)(rate(node_network_transmit_bytes_total{device!~\"lo\",instance=~\"$instance\"}[1m]))",
+          "legendFormat": "{{instance}}"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+name: Fabric
+version: "2.0.0"
+caliper:
+  blockchain: fabric
+  sutOptions:
+    mutualTls: false
+
+channels:
+  - channelName: dtchannel
+    contracts:
+      - id: governance
+
+organizations:
+  - mspid: Org1MSP
+    connectionProfile:
+      path: networks/org1-connection.yaml
+      discover: true
+    identities:
+      certificates:
+        - name: admin.org1
+          admin: true
+          clientPrivateKey:
+            path: "/home/ubuntu/byz-fed-ids-5g/fabric/crypto-config/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp/keystore/priv_sk"
+          clientSignedCert:
+            path: "/home/ubuntu/byz-fed-ids-5g/fabric/crypto-config/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp/signcerts/Admin@org1.example.com-cert.pem"
+
+  - mspid: Org2MSP
+    connectionProfile:
+      path: networks/org2-connection.yaml
+      discover: true
+    identities:
+      certificates:
+        - name: admin.org2
+          admin: true
+          clientPrivateKey:
+            path: "/home/ubuntu/byz-fed-ids-5g/fabric/crypto-config/peerOrganizations/org2.example.com/users/Admin@org2.example.com/msp/keystore/priv_sk"
+          clientSignedCert:
+            path: "/home/ubuntu/byz-fed-ids-5g/fabric/crypto-config/peerOrganizations/org2.example.com/users/Admin@org2.example.com/msp/signcerts/Admin@org2.example.com-cert.pem"

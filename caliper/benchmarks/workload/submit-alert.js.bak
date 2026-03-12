@@ -1,0 +1,45 @@
+'use strict';
+const { WorkloadModuleBase } = require('@hyperledger/caliper-core');
+
+class SubmitAlertWorkload extends WorkloadModuleBase {
+    constructor() {
+        super();
+        this.txIndex = 0;
+        this.runId = 0;
+    }
+
+    async initializeWorkloadModule(workerIndex, totalWorkers, roundIndex, roundArguments, sutAdapter, sutContext) {
+        await super.initializeWorkloadModule(workerIndex, totalWorkers, roundIndex, roundArguments, sutAdapter, sutContext);
+        this.txIndex = 0;
+        // Timestamp unique à chaque init de round → alertID jamais en doublon
+        this.runId = Date.now();
+    }
+
+    async submitTransaction() {
+        this.txIndex++;
+        const clientID = `c${this.workerIndex}-${this.txIndex}`;
+        const alertID  = `${this.runId}-${this.workerIndex}-${this.txIndex}`;
+        const nonce    = `n-${this.workerIndex}-${this.txIndex}-${Date.now()}`;
+        const identity = 'admin.org1';
+
+        await this.sutAdapter.sendRequests({
+            contractId: this.roundArguments.contractId,
+            contractFunction: 'SubmitAlert',
+            invokerIdentity: identity,
+            contractArguments: [
+                alertID,
+                '1',
+                clientID,
+                String(Math.floor(Date.now() / 1000)),
+                'HIGH',
+                `sig-${this.workerIndex}-${this.txIndex}`,
+                `{"model":"caliper","worker":${this.workerIndex},"tx":${this.txIndex}}`,
+                nonce
+            ],
+            readOnly: false
+        });
+    }
+}
+
+function createWorkloadModule() { return new SubmitAlertWorkload(); }
+module.exports.createWorkloadModule = createWorkloadModule;

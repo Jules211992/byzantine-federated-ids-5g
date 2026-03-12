@@ -1,0 +1,10 @@
+Metric,Value,Std / p95,Notes
+"F1-Score (t=0.50, best run r19)",0.9535,+/-0.0004,3 independent runs
+"F1-Score (t=0.50, mean r20)",0.9518,+/-0.0010,converged
+Precision (t=0.50),0.9699,-,official t
+Recall (t=0.50),0.9376,-,official t
+FPR (t=0.50),0.0619,-,class-balanced trade-off
+ROC-AUC,0.9883,+/-0.0001,3 runs
+Eval latency p50 (batch=25879),3.55 ms,p95=5.65ms,n=285 rounds
+Inference per sample,0.137 us,-,p50/n_test
+Throughput,7.29 M samples/s,-,1/(0.137e-6)

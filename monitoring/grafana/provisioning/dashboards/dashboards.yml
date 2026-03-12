@@ -1,0 +1,10 @@
+apiVersion: 1
+providers:
+  - name: 'Provisioned'
+    orgId: 1
+    folder: 'Provisioned'
+    type: file
+    disableDeletion: true
+    editable: true
+    options:
+      path: /etc/grafana/provisioning/dashboards-json

@@ -1,0 +1,30 @@
+name: org2-connection
+version: "1.0"
+client:
+  organization: Org2MSP
+  connection:
+    timeout:
+      peer:
+        endorser: "300"
+      orderer: "300"
+organizations:
+  Org2MSP:
+    mspid: Org2MSP
+    peers:
+      - peer0.org2.example.com
+peers:
+  peer0.org2.example.com:
+    url: grpcs://peer0.org2.example.com:7051
+    tlsCACerts:
+      path: /home/ubuntu/byz-fed-ids-5g/fabric/crypto-config/peerOrganizations/org2.example.com/peers/peer0.org2.example.com/tls/ca.crt
+    grpcOptions:
+      ssl-target-name-override: peer0.org2.example.com
+      hostnameOverride: peer0.org2.example.com
+orderers:
+  orderer1.example.com:
+    url: grpcs://orderer1.example.com:7050
+    tlsCACerts:
+      path: /home/ubuntu/byz-fed-ids-5g/fabric/crypto-config/ordererOrganizations/example.com/msp/tlscacerts/tlsca.example.com-cert.pem
+    grpcOptions:
+      ssl-target-name-override: orderer1.example.com
+      hostnameOverride: orderer1.example.com

@@ -1,0 +1,66 @@
+'use strict';
+
+const { WorkloadModuleBase } = require('@hyperledger/caliper-core');
+
+class SubmitAlertWorkload extends WorkloadModuleBase {
+  constructor() {
+    super();
+    this.txIndex = 0;
+  }
+
+  async initializeWorkloadModule(workerIndex, totalWorkers, roundIndex, roundArguments, sutAdapter, sutContext) {
+    await super.initializeWorkloadModule(workerIndex, totalWorkers, roundIndex, roundArguments, sutAdapter, sutContext);
+    this.workerIndex = workerIndex;
+    this.totalWorkers = totalWorkers;
+    this.roundArgs = roundArguments || {};
+    this.contractId = this.roundArgs.contractId || process.env.CC_ID || 'governance';
+    this.contractFunction = this.roundArgs.contractFunction || process.env.CC_FCN || 'SubmitAlert';
+    this.runId = this.roundArgs.runId || `${Math.floor(Date.now() / 1000)}`;
+    this.baseClientId = this.roundArgs.baseClientId || `caliper-client-${this.workerIndex}`;
+    this.clientId = `${this.baseClientId}-${this.runId}`;
+    this.timeout = this.roundArgs.timeout || 30;
+    this.org1Identity = this.roundArgs.org1Identity || 'admin-org1';
+    this.org2Identity = this.roundArgs.org2Identity || 'admin-org2';
+  }
+
+  async submitTransaction() {
+    this.txIndex += 1;
+
+    const nowMs = Date.now();
+    const ts = Math.floor(nowMs / 1000);
+    const round = this.txIndex;
+
+    const alertId = `cal-${this.workerIndex}-${round}-${nowMs}`;
+    const severity = 'HIGH';
+    const signature = `sig-${this.workerIndex}-${round}`;
+    const meta = JSON.stringify({ model: 'caliper', runId: this.runId, worker: this.workerIndex, seq: round });
+    const nonce = `n-${this.workerIndex}-${round}-${nowMs}`;
+
+    const invokerIdentity = (this.workerIndex % 2 === 0) ? this.org1Identity : this.org2Identity;
+
+    const request = {
+      contractId: this.contractId,
+      contractFunction: this.contractFunction,
+      contractArguments: [
+        String(alertId),
+        String(round),
+        String(this.clientId),
+        String(ts),
+        String(severity),
+        String(signature),
+        String(meta),
+        String(nonce)
+      ],
+      timeout: this.timeout,
+      invokerIdentity
+    };
+
+    await this.sutAdapter.sendRequests(request);
+  }
+}
+
+function createWorkloadModule() {
+  return new SubmitAlertWorkload();
+}
+
+module.exports.createWorkloadModule = createWorkloadModule;
