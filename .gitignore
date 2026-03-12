@@ -22,3 +22,5 @@ phase10/
 caliper/node_modules/
 caliper/pkg/
 phase6/splits/*.npy
+phase6/dataset/
+phase6/splits/
