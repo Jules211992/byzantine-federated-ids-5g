@@ -21,3 +21,4 @@ phase10/
 .DS_Store
 caliper/node_modules/
 caliper/pkg/
+phase6/splits/*.npy
