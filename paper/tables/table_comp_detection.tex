@@ -1,0 +1,22 @@
+\begin{table*}[!t]
+\renewcommand{\arraystretch}{1.2}
+\caption{Comparison with Related FL-Based IDS Approaches (mean\,$\pm$\,std over 3 seeds, holdout set)}
+\label{tab:comp_detection}
+\centering
+\begin{tabular}{llllllll}
+\hline
+\textbf{Approach} & \textbf{Dataset} & \textbf{Model} & \textbf{Aggregation} & \textbf{Byzantine} & \textbf{Blockchain} & \textbf{F1} & \textbf{ROC-AUC} \\
+\hline
+McMahan et al.~\cite{S29}   & MNIST       & CNN         & FedAvg        & \xmark & \xmark & --     & -- \\
+Blanchard et al.~\cite{S5}  & Synthetic   & LR          & Multi-Krum    & \cmark & \xmark & --     & -- \\
+Tolpegin et al.~\cite{S10}  & CIFAR-10    & CNN         & FedAvg        & \cmark & \xmark & --     & -- \\
+Cui et al.~\cite{S23}       & NSL-KDD     & DNN         & FedAvg        & \xmark & \cmark & 0.961  & -- \\
+Preuveneers et al.~\cite{S36} & CICIDS   & DNN         & FedAvg        & \xmark & \cmark & 0.974  & -- \\
+Singh et al.~\cite{S2}      & 5G-NIDD     & LR          & FedAvg        & \xmark & \xmark & 0.951  & -- \\
+\hline
+\textbf{Ours (FedAvg)}      & 5G-NIDD & LR & FedAvg        & \cmark & \cmark & $0.9627\pm0.0009$ & $0.9817\pm0.0001$ \\
+\textbf{Ours (Multi-Krum)}  & 5G-NIDD & LR & Multi-Krum    & \cmark & \cmark & $0.9589\pm0.0020$ & $0.9800\pm0.0004$ \\
+\textbf{Ours (TrimmedMean)} & 5G-NIDD & LR & TrimmedMean   & \cmark & \cmark & $0.9634\pm0.0006$ & $0.9812\pm0.0001$ \\
+\hline
+\end{tabular}
+\end{table*}
