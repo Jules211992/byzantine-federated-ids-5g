@@ -1,0 +1,44 @@
+\begin{table*}[!t]
+\renewcommand{\arraystretch}{1.1}
+\caption{Byzantine Attack Impact. $\dag$~Backdoor: 20 rounds; others: 5 rounds. Baseline (clean, R20): F1\,=\,0.9627, FPR\,=\,0.0368.}
+\label{tab:byzantine}
+\centering\footnotesize\setlength{\tabcolsep}{4pt}
+\begin{tabular}{llccccr}
+\hline
+\textbf{Attack} & \textbf{Ratio} & \textbf{Aggregator} & \textbf{F1} & \textbf{FPR} & \textbf{ROC-AUC} & \textbf{$\Delta$F1} \\
+\hline
+Backdoor $\dag$ & 20% & FedAvg & 0.9612 & 0.0340 & 0.9817 & $-0.0015$ \\
+Backdoor $\dag$ & 20% & Multi-Krum & 0.9574 & 0.0288 & 0.9804 & $-0.0053$ \\
+Backdoor $\dag$ & 20% & TrimmedMean & 0.9637 & 0.0397 & 0.9813 & $+0.0011$ \\
+Backdoor $\dag$ & 30% & FedAvg & 0.9609 & 0.0338 & 0.9817 & $-0.0017$ \\
+Backdoor $\dag$ & 30% & Multi-Krum & 0.9587 & 0.0367 & 0.9788 & $-0.0040$ \\
+Backdoor $\dag$ & 30% & TrimmedMean & 0.9628 & 0.0369 & 0.9813 & $+0.0001$ \\
+\hline
+Gaussian & 20% & FedAvg & 0.9624 & 0.0447 & 0.9800 & $-0.0003$ \\
+Gaussian & 20% & Multi-Krum & 0.9596 & 0.0398 & 0.9799 & $-0.0031$ \\
+Gaussian & 20% & TrimmedMean & 0.9613 & 0.0438 & 0.9796 & $-0.0014$ \\
+Gaussian & 30% & FedAvg & 0.9616 & 0.0435 & 0.9800 & $-0.0011$ \\
+Gaussian & 30% & Multi-Krum & 0.9587 & 0.0366 & 0.9783 & $-0.0040$ \\
+Gaussian & 30% & TrimmedMean & 0.9609 & 0.0432 & 0.9797 & $-0.0018$ \\
+\hline
+Random & 20% & FedAvg & 0.9620 & 0.0448 & 0.9799 & $-0.0007$ \\
+Random & 20% & Multi-Krum & 0.9592 & 0.0396 & 0.9798 & $-0.0035$ \\
+Random & 20% & TrimmedMean & 0.9605 & 0.0430 & 0.9796 & $-0.0022$ \\
+Random & 30% & FedAvg & 0.9623 & 0.0445 & 0.9800 & $-0.0004$ \\
+Random & 30% & Multi-Krum & 0.9593 & 0.0369 & 0.9782 & $-0.0034$ \\
+Random & 30% & TrimmedMean & 0.9619 & 0.0443 & 0.9797 & $-0.0008$ \\
+\hline
+Scaling & 20% & FedAvg & 0.9626 & 0.0451 & 0.9800 & $-0.0001$ \\
+Scaling & 20% & Multi-Krum & 0.9593 & 0.0394 & 0.9800 & $-0.0034$ \\
+Scaling & 20% & TrimmedMean & 0.9604 & 0.0425 & 0.9797 & $-0.0023$ \\
+Scaling & 30% & FedAvg & 0.9625 & 0.0451 & 0.9800 & $-0.0002$ \\
+Scaling & 30% & Multi-Krum & 0.9588 & 0.0364 & 0.9782 & $-0.0039$ \\
+Scaling & 30% & TrimmedMean & 0.9617 & 0.0442 & 0.9797 & $-0.0010$ \\
+\hline
+Signflip & 20% & FedAvg & 0.9627 & 0.0451 & 0.9800 & $+0.0000$ \\
+Signflip & 20% & Multi-Krum & 0.9586 & 0.0383 & 0.9800 & $-0.0041$ \\
+Signflip & 20% & TrimmedMean & 0.9618 & 0.0446 & 0.9797 & $-0.0009$ \\
+Signflip & 30% & FedAvg & 0.9622 & 0.0445 & 0.9800 & $-0.0005$ \\
+Signflip & 30% & Multi-Krum & 0.9594 & 0.0374 & 0.9782 & $-0.0033$ \\
+Signflip & 30% & TrimmedMean & 0.9617 & 0.0443 & 0.9796 & $-0.0010$ \\
+\hline\end{tabular}\end{table*}

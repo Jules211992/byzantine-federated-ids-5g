@@ -1,0 +1,13 @@
+\begin{table}[!t]
+\renewcommand{\arraystretch}{1.15}
+\caption{Global Model Performance (3 Seeds, Val/Holdout Split, Round~20)}
+\label{tab:clean}
+\centering\scriptsize\setlength{\tabcolsep}{3pt}
+\begin{tabular}{lcccccc}
+\hline
+\textbf{Aggregator} & \textbf{Thr.} & \textbf{W-F1} & \textbf{F1} & \textbf{FPR} & \textbf{ROC-AUC} & \textbf{T\,(ms)} \\
+\hline
+FedAvg & 0.45 & 0.9629 $\pm$ 0.0002 & 0.9627 $\pm$ 0.0009 & 0.0368 $\pm$ 0.0020 & 0.9817 $\pm$ 0.0001 & 0.000 \\
+Multi-Krum & 0.50 & 0.9624 $\pm$ 0.0005 & 0.9589 $\pm$ 0.0020 & 0.0321 $\pm$ 0.0042 & 0.9800 $\pm$ 0.0004 & 1.529 \\
+TrimmedMean & 0.43 & 0.9626 $\pm$ 0.0002 & 0.9634 $\pm$ 0.0006 & 0.0387 $\pm$ 0.0011 & 0.9812 $\pm$ 0.0001 & 0.267 \\
+\hline\end{tabular}\end{table}

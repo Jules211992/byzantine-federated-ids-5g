@@ -1,4 +1,0 @@
-Scenario,F1_honest,FPR_honest,F1_byz,FPR_byz,Delta_F1_h_vs_base,Delta_FPR_h_vs_base
-Baseline,0.9441,0.0871,,,0.0000,0.0000
-LabelFlip,0.9569,0.0732,0.0646,0.9353,0.0128,-0.0139
-Scaling,0.9745,0.0403,0.0378,0.9650,0.0304,-0.0468
